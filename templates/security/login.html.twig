@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+    </style>
+
+    <main class="form-signin w-100 m-auto">
+        <form method="post" class="m-auto">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+            <img class="mb-4" src="media/img.png" alt="" width="250" height="57">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <div class="form-floating">
+                <input type="email" value="{{ last_username }}" name="email" id="floatingInput" class="form-control"
+                       autocomplete="email" placeholder="name@example.com" required autofocus>
+                <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" name="password" id="floatingPassword" class="form-control"
+                       autocomplete="current-password" placeholder="Password" required>
+                <label for="floatingPassword">Password</label>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            </div>
+            {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+            #}
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit">
+                Sign in
+            </button>
+        </form>
+    </main>
+{% endblock %}
