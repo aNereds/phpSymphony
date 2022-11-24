@@ -20,6 +20,7 @@
     </style>
 
     <main class="form-signin w-100 m-auto">
+        <img class="mb-4" src="media/img.png" alt="" width="250" height="57">
         <form method="post" class="m-auto">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -30,7 +31,6 @@
                     You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
             {% endif %}
-            <img class="mb-4" src="media/img.png" alt="" width="250" height="57">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
             <div class="form-floating">
                 <input type="email" value="{{ last_username }}" name="email" id="floatingInput" class="form-control"
